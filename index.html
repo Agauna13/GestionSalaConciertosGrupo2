@@ -1,12 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <script src="script.js"></script>
-  </body>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Conciertos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background: #f0f0f0;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Gestión de Conciertos</h1>
+
+    <!-- Seleccionar concierto -->
+    <div class="form-group">
+      <label for="selectConcierto">Selecciona un Concierto:</label>
+      <select id="selectConcierto">
+        <option value="1">Concierto 1: Rauw Alejandro</option>
+        <option value="2">Concierto 2: Guns N' Roses</option>
+        <option value="3">Concierto 3: Anuel AA</option>
+        <option value="4">Concierto 4: Beethoven</option>
+      </select>
+    </div>
+
+    <!-- Calcular precio ticket con descuento -->
+    <div class="form-group">
+      <label for="descuento">Descuento (%):</label>
+      <input type="number" id="descuento" placeholder="Ingrese descuento" min="0" max="100">
+      <button onclick="calcularPrecioTicket()">Calcular Precio con Descuento</button>
+    </div>
+
+    <!-- Mostrar datos del concierto -->
+    <button onclick="mostrarDetallesConcierto()">Mostrar Detalles del Concierto</button>
+
+    <!-- Resultados -->
+    <div id="result" class="result"></div>
+  </div>
+
+  <!-- Importa tu archivo JavaScript externo -->
+  <script src="script.js"></script>
+</body>
 </html>

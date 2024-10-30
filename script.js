@@ -17,6 +17,7 @@ function Concierto(idConcierto, nombreConcierto, nombreArtista, generoConcierto,
 function Ticket(id_Cliente, concierto, descuento) {
 
     this.id_Cliente = id_Cliente;
+    this.idConcierto = concierto.idConcierto;
     this.nombreConcierto = concierto.nombreConcierto;
     this.descuento = descuento;
     this.precio = concierto.precioBase - (concierto.precioBase * (descuento / 100));
