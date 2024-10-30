@@ -47,17 +47,30 @@ function crearDescripcionEvento(nombreConcierto, nombreArtista, fecha) {
 
 //NUMBER
 function validarTicketsDisponibles(ticketsIngresados, maxTickets) {
-  if (typeof ticketsIngresados !== "number" || typeof maxTickets !== "number") {
-    console.log("Error, los campos deben ser números");
+  if (!Number.isInteger(ticketsIngresados) || !Number.isInteger(maxTickets)) {
+    // isInteger comprueba que el valor sea un Integer
+    console.error("Error: Los valores deben ser números enteros.");
     return false;
   }
 
-  if (ticketsIngresados < 0 || maxTickets < 0) {
-    console.log("Error, los valores deben ser positivos");
+  if (ticketsIngresados < 0 || maxTickets <= 0) {
+    console.error(
+      "Error: Los valores deben ser positivos y maxTickets mayor a cero."
+    );
     return false;
   }
 
-  return ticketsIngresados <= maxTickets;
+  if (ticketsIngresados > maxTickets) {
+    console.error(
+      "Error: No puede haber más tickets ingresados que los tickets máximos."
+    );
+    return false;
+  }
+
+  const disponibles = maxTickets - ticketsIngresados;
+  console.log(`Tickets disponibles: ${disponibles}`);
+
+  return true;
 }
 
 function calcularIngresoAsistente(ingresoTotal, asistentes) {
