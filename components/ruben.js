@@ -1,5 +1,5 @@
 //STRINGS
-function formatearNombreConcierto(nombre) {
+export function formatearNombreConcierto(nombre) {
   if (typeof nombre !== "string") {
     console.log("Error, el valor debe ser de tipo string");
     return false;
@@ -13,7 +13,7 @@ function formatearNombreConcierto(nombre) {
   return palabras.join(" "); // Une las palabras en un solo string
 }
 
-function formatearNombreArtista(artista) {
+export function formatearNombreArtista(artista) {
   if (typeof artista !== "string") {
     console.log("Error, el valor debe ser de tipo string");
     return false;
@@ -30,7 +30,7 @@ function formatearNombreArtista(artista) {
   return palabrasLimpias.join(" ");
 }
 
-function crearDescripcionEvento(nombreConcierto, nombreArtista, fecha) {
+export function crearDescripcionEvento(nombreConcierto, nombreArtista, fecha) {
   if (
     typeof nombreConcierto !== "string" ||
     typeof nombreArtista !== "string"
@@ -46,7 +46,7 @@ function crearDescripcionEvento(nombreConcierto, nombreArtista, fecha) {
 }
 
 //NUMBER
-function validarTicketsDisponibles(ticketsIngresados, maxTickets) {
+export function validarTicketsDisponibles(ticketsIngresados, maxTickets) {
   if (!Number.isInteger(ticketsIngresados) || !Number.isInteger(maxTickets)) {
     // isInteger comprueba que el valor sea un Integer
     console.error("Error: Los valores deben ser números enteros.");
@@ -73,7 +73,7 @@ function validarTicketsDisponibles(ticketsIngresados, maxTickets) {
   return true;
 }
 
-function calcularIngresoAsistente(ingresoTotal, asistentes) {
+export function calcularIngresoAsistente(ingresoTotal, asistentes) {
   if (typeof ingresoTotal !== "number" || typeof asistentes !== "number") {
     console.log("Error, los campos deben ser números");
     return false;
@@ -87,7 +87,7 @@ function calcularIngresoAsistente(ingresoTotal, asistentes) {
   return ingresoTotal / asistentes;
 }
 
-function generarIDConcierto(fechaConcierto, precioBase) {
+export function generarIDConcierto(fechaConcierto, precioBase) {
   // Reemplaza todos los guiones en la fecha con una cadena vacía, es decir, los elimina
   let fechaFormateada = fechaConcierto.replace(/-/g, "");
 
