@@ -14,18 +14,23 @@ function programarRecordatorio(fechaConcierto, diasAntes) {
 
 function determinarTemporada(fechaConcierto) {
     let fecha = new Date(fechaConcierto);
-    let mes = fecha.getMonth() + 1;
+    let mes = fecha.getMonth() + 1; // Enero es 0, por lo que sumamos 1 para alinear con los meses humanos
+    let dia = fecha.getDate();
 
-    if (mes >= 3 && mes <= 5) {
+    if ((mes === 3 && dia >= 20) || (mes === 4) || (mes === 5) || (mes === 6 && dia <= 20)) {
         return 'Primavera';
-    } else if (mes >= 6 && mes <= 8) {
+    }
+    else if ((mes === 6 && dia >= 21) || (mes === 7) || (mes === 8) || (mes === 9 && dia <= 22)) {
         return 'Verano';
-    } else if (mes >= 9 && mes <= 11) {
+    }
+    else if ((mes === 9 && dia >= 23) || (mes === 10) || (mes === 11) || (mes === 12 && dia <= 20)) {
         return 'Otoño';
-    } else {
+    }
+    else {
         return 'Invierno';
     }
 }
+
 
 function calcularDiasAntelacion(fechaConcierto, fechaVenta) {
     let fechaConciertoObj = new Date(fechaConcierto);
@@ -52,5 +57,6 @@ eventos.forEach(evento => {
 });
 
 
-export { eventos };
+
+export { programarRecordatorio };
 
