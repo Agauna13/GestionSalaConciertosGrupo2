@@ -1,7 +1,6 @@
-//lista conciertos, guardará una lista de Conciertos
+
 const listaConciertos = [];
 
-//constructor objetos Concierto y Ticket
 function Concierto(idConcierto, nombreConcierto, nombreArtista, generoConcierto, fechaConcierto, precioBase) {
 
     this.idConcierto = idConcierto;
@@ -10,7 +9,6 @@ function Concierto(idConcierto, nombreConcierto, nombreArtista, generoConcierto,
     this.fechaConcierto = fechaConcierto;
     this.generoConcierto = generoConcierto;
     this.precioBase = precioBase;
-    //lista tickets
     this.listaTickets = [];
 }
 
@@ -22,6 +20,7 @@ function Ticket(id_Cliente, concierto, descuento) {
     this.descuento = descuento;
     this.precio = concierto.precioBase - (concierto.precioBase * (descuento / 100));
 }
+
 
 //conciertos ya creados
 const concierto1 = new Concierto(1, "Concierto 1", "Rauw Alejandro", "Opera", "2024-09-24", 100);
@@ -48,6 +47,112 @@ listaConciertos.push(concierto4);
 const ticket4 = new Ticket(4, concierto4, 30);
 concierto4.listaTickets.push(ticket4);
 
+
+/******************************************************************************************** */
+
+function mostrarConciertos() {
+    return listaConciertos.map(concierto => {
+        return {
+            ID: concierto.idConcierto,
+            Nombre: concierto.nombreConcierto,
+            Artista: concierto.nombreArtista,
+            Género: concierto.generoConcierto,
+            Fecha: concierto.fechaConcierto,
+            PrecioBase: concierto.precioBase
+        };
+    });
+}
+
+
+function renderizarConciertos() {
+    const contenedor = document.getElementById("contenedorConciertos");
+    contenedor.innerHTML = ""; 
+    const conciertos = mostrarConciertos();
+
+  
+    conciertos.forEach(concierto => {
+        const conciertoHTML = document.createElement("div");
+        conciertoHTML.classList.add("concierto");
+
+        conciertoHTML.innerHTML = `
+            <div class="titulo">${concierto.Nombre}</div>
+            <p><strong>ID:</strong> ${concierto.ID}</p>
+            <p><strong>Artista:</strong> ${concierto.Artista}</p>
+            <p><strong>Género:</strong> ${concierto.Género}</p>
+            <p><strong>Fecha:</strong> ${concierto.Fecha}</p>
+            <p><strong>Precio Base:</strong> $${concierto.PrecioBase}</p>
+        `;
+
+        contenedor.appendChild(conciertoHTML);
+    });
+}
+
+renderizarConciertos();
+
+
+document.getElementById("formConcierto").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    const nombreConcierto = document.getElementById("nombreConcierto").value;
+    const nombreArtista = document.getElementById("nombreArtista").value;
+    const fechaConcierto = document.getElementById("fechaConcierto").value;
+    const generoConcierto = document.getElementById("generoConcierto").value;
+    const precioBase = parseFloat(document.getElementById("precioConcierto").value);
+    let idConcierto = generarIDConcierto(fechaConcierto, precioBase);
+
+    const nuevoConcierto = new Concierto(idConcierto, nombreConcierto, nombreArtista, generoConcierto, fechaConcierto, precioBase);
+    listaConciertos.push(nuevoConcierto);
+
+    alert("Concierto añadido correctamente");
+    document.getElementById("formConcierto").reset();
+
+    console.log(listaConciertos); 
+    renderizarConciertos();
+});
+
+
+
+// Función para revisar conciertos próximos
+function revisarConciertos() {
+    const hoy = new Date();
+
+    listaConciertos.forEach(concierto => {
+        const fechaConcierto = new Date(concierto.fechaConcierto);
+        const diferenciaDias = (fechaConcierto - hoy) / (1000 * 60 * 60 * 24);
+
+        if (diferenciaDias >= 0 && diferenciaDias <= 7) {
+            alert(`El concierto "${concierto.nombreConcierto}" del artista ${concierto.nombreArtista} es en menos de una semana!`);
+        }
+    });
+}
+
+// Comprobar automáticamente cada día si hay conciertos cercanos
+setInterval(revisarConciertos, 86400000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************************************************** */
+
+
+
+
+
+/*Objeto Date*/
 function programarRecordatorio(fechaConcierto, diasAntes) {
     let fecha = new Date(fechaConcierto);
     fecha.setDate(fecha.getDate() - diasAntes);
@@ -83,18 +188,18 @@ function calcularDiasAntelacion(fechaConcierto, fechaVenta) {
 }
 
 
-// eventos.forEach(evento => {
+// listaConciertos.forEach(listaConciertos => {
 
-//     let recordatorio = programarRecordatorio(evento.fecha, 10);
-//     console.log(`Recordatorio para ${evento.nombreConcierto}: ${recordatorio}`);
-
-
-//     let temporada = determinarTemporada(evento.fecha);
-//     console.log(`Temporada para ${evento.nombreConcierto}: ${temporada}`);
+//     let recordatorio = programarRecordatorio(listaConciertos.fecha, 10);
+//     console.log(`Recordatorio para ${listaConciertos.nombreConcierto}: ${recordatorio}`);
 
 
-//     let diasAntelacion = calcularDiasAntelacion(evento.fecha, hoy);
-//     console.log(`Días de antelación para venta de tickets para ${evento.nombreConcierto}: ${diasAntelacion}`);
+//     let temporada = determinarTemporada(listaConciertos.fecha);
+//     console.log(`Temporada para ${listaConciertos.nombreConcierto}: ${temporada}`);
+
+
+//     let diasAntelacion = calcularDiasAntelacion(listaConciertos.fecha, hoy);
+//     console.log(`Días de antelación para venta de tickets para ${listaConciertos.nombreConcierto}: ${diasAntelacion}`);
 // });
 
 //STRINGS
@@ -129,7 +234,7 @@ function formatearNombreArtista(artista) {
     return palabrasLimpias.join(" ");
 }
 
-function crearDescripcionEvento(nombreConcierto, nombreArtista, fecha) {
+function crearDescripcionlistaConciertos(nombreConcierto, nombreArtista, fecha) {
     if (
         typeof nombreConcierto !== "string" ||
         typeof nombreArtista !== "string"
