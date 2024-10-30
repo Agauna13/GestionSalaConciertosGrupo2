@@ -29,7 +29,7 @@ listaConciertos.push(concierto1);
 const ticket1 = new Ticket(1, concierto1, 10);
 concierto1.listaTickets.push(ticket1);
 
-const concierto2 = new Concierto(2, "Concierto 2", "Guns N' Roses", "Rock", "2024-10-05", 150);
+const concierto2 = new Concierto(2, "Concierto 2", "Guns N' Roses", "Rock", "2024-11-03", 150);
 listaConciertos.push(concierto2);
 
 const ticket2 = new Ticket(2, concierto2, 20);
@@ -112,29 +112,69 @@ document.getElementById("formConcierto").addEventListener("submit", function(eve
 
 
 
-// Función para revisar conciertos próximos
+
+
+
+
 function revisarConciertos() {
     const hoy = new Date();
+    const proximosConciertos = document.getElementById("listaConciertosProximos");
+    proximosConciertos.innerHTML = ""; 
 
     listaConciertos.forEach(concierto => {
         const fechaConcierto = new Date(concierto.fechaConcierto);
         const diferenciaDias = (fechaConcierto - hoy) / (1000 * 60 * 60 * 24);
 
+
         if (diferenciaDias >= 0 && diferenciaDias <= 7) {
-            alert(`El concierto "${concierto.nombreConcierto}" del artista ${concierto.nombreArtista} es en menos de una semana!`);
+            const conciertoDiv = document.createElement("div");
+            conciertoDiv.className = "concierto";
+            conciertoDiv.innerText = `🎶 ${concierto.nombreConcierto} - ${concierto.nombreArtista} | Fecha: ${concierto.fechaConcierto} | Género: ${concierto.generoConcierto}`;
+
+            proximosConciertos.appendChild(conciertoDiv);
         }
     });
 }
 
-// Comprobar automáticamente cada día si hay conciertos cercanos
-setInterval(revisarConciertos, 86400000);
 
+document.getElementById("formTicket").addEventListener("submit", function(event) {
+    event.preventDefault();
 
+    const idCliente = document.getElementById("idTicket").value;
+    const nombreConcierto = document.getElementById("nombreConciertoTicket").value;
+    const descuento = parseFloat(document.getElementById("descuento").value);
 
+    const concierto = listaConciertos.find(c => c.nombreConcierto === nombreConcierto);
+    if (concierto) {
+        const nuevoTicket = new Ticket(idCliente, concierto, descuento);
+        concierto.listaTickets.push(nuevoTicket);
 
+        document.getElementById("formTicket").reset();
+        alert("Ticket añadido correctamente");
+    } else {
+        alert("Seleccione un concierto válido.");
+    }
+});
 
+// Función para mostrar tickets del concierto seleccionado
+function mostrarTickets() {
+    const nombreConcierto = document.getElementById("nombreConciertoTicket").value;
+    const concierto = listaConciertos.find(c => c.nombreConcierto === nombreConcierto);
 
+    const listaTicketsDiv = document.getElementById("listaTickets");
+    listaTicketsDiv.innerHTML = ""; // Limpiar contenido previo
 
+    if (concierto && concierto.listaTickets.length > 0) {
+        concierto.listaTickets.forEach(ticket => {
+            const ticketDiv = document.createElement("div");
+            ticketDiv.className = "ticket";
+            ticketDiv.innerText = `Cliente: ${ticket.id_Cliente} | Concierto: ${ticket.nombreConcierto} | Precio: $${ticket.precio.toFixed(2)} | Descuento: ${ticket.descuento}%`;
+            listaTicketsDiv.appendChild(ticketDiv);
+        });
+    } else {
+        listaTicketsDiv.innerHTML = "<p>No hay tickets disponibles para el concierto seleccionado.</p>";
+    }
+}
 
 
 
