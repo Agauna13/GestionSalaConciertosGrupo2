@@ -12,15 +12,12 @@
       <h1>DASHBOARD</h1>
       <div id="menuFlotante" onclick="revisarConciertos()">
         Revisar Conciertos Cercanos
-        </div>
+      </div>
     </nav>
 
     <main>
       <h1>Proximos Eventos</h1>
-      <div id="contenedorConciertos">
-
-
-      </div>
+      <div id="contenedorConciertos"></div>
 
       <h2>Añadir Concierto</h2>
       <form id="formConcierto">
@@ -51,7 +48,6 @@
         />
         <button type="submit">Añadir Concierto</button>
       </form>
-      
 
       <h2>Añadir Ticket</h2>
       <form id="formTicket">
@@ -61,11 +57,11 @@
           placeholder="Introducza su nombre"
           required
         />
-        <select id ="nombreConciertoTicket">
-            <option value="Concierto 1">Concierto 1</option>
-            <option value="Concierto 2">Concierto 2</option>
-            <option value="Concierto 3">Concierto 3</option>
-            <option value="Concierto 4">Concierto 4</option>
+        <select id="nombreConciertoTicket">
+          <option value="Concierto 1">Concierto 1</option>
+          <option value="Concierto 2">Concierto 2</option>
+          <option value="Concierto 3">Concierto 3</option>
+          <option value="Concierto 4">Concierto 4</option>
         </select>
         <input
           id="descuento"
@@ -76,18 +72,19 @@
         <button type="submit">Añadir Ticket</button>
       </form>
 
-      <button onclick="mostrarTickets()">Mostrar Tickets del Concierto Seleccionado</button>
+      <button onclick="mostrarTickets()">
+        Mostrar Tickets del Concierto Seleccionado
+      </button>
 
-    <div id="ticketsDisplay">
+      <div id="ticketsDisplay">
         <h3>Tickets del Concierto Seleccionado</h3>
         <div id="listaTickets"></div>
-    </div>
-
+      </div>
 
       <div id="conciertosProximos">
         <h3>Conciertos Próximos (menos de 1 semana)</h3>
         <div id="listaConciertosProximos"></div>
-    </div>
+      </div>
     </main>
 
     <script src="script.js"></script>
