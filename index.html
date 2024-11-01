@@ -9,9 +9,12 @@
   <body>
     <nav>
       <h1>DASHBOARD</h1>
-      <div id="menuFlotante" onclick="revisarConciertos()">
-        Revisar Conciertos Cercanos
-      </div>
+      <a
+        id="menuFlotante"
+        href="#conciertosProximos"
+        onclick="revisarConciertos();"
+        >Conciertos Cercanos</a
+      >
     </nav>
     <main>
       <h1>Próximos Eventos</h1>
@@ -81,7 +84,9 @@
         <button type="submit">Añadir Ticket</button>
       </form>
 
-      <button onclick="mostrarTickets()">Mostrar Tickets</button>
+      <div id="botonMostrarTicketsContainer">
+        <button onclick="mostrarTickets()">Mostrar Tickets</button>
+      </div>
 
       <div id="ticketsDisplay">
         <div id="listaTickets"></div>
