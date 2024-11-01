@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buscador de listaConciertoss</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Buscador de listaConciertos</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
-
   <body>
     <nav>
       <h1>DASHBOARD</h1>
@@ -14,70 +13,77 @@
         Revisar Conciertos Cercanos
       </div>
     </nav>
-
     <main>
-      <h1>Proximos Eventos</h1>
+      <h1>Próximos Eventos</h1>
       <div id="contenedorConciertos"></div>
 
       <h2>Añadir Concierto</h2>
       <form id="formConcierto">
+        <label for="nombreConcierto">Nombre del Concierto:</label>
         <input
           id="nombreConcierto"
           type="text"
           placeholder="Nombre del Concierto"
           required
         />
+
+        <label for="nombreArtista">Nombre del Artista:</label>
         <input
           id="nombreArtista"
           type="text"
           placeholder="Nombre del Artista"
           required
         />
+
+        <label for="fechaConcierto">Fecha del Concierto:</label>
         <input id="fechaConcierto" type="date" required />
+
+        <label for="generoConcierto">Género del Concierto:</label>
         <input
           id="generoConcierto"
           type="text"
           placeholder="Género del Concierto"
           required
         />
+
+        <label for="precioConcierto">Precio Base:</label>
         <input
           id="precioConcierto"
           type="number"
           placeholder="Precio Base"
           required
         />
+
         <button type="submit">Añadir Concierto</button>
       </form>
 
       <h2>Añadir Ticket</h2>
       <form id="formTicket">
-        <input
-          id="idTicket"
-          type="text"
-          placeholder="Introducza su nombre"
-          required
-        />
+        <label for="idTicket">Introduzca su nombre:</label>
+        <input id="idTicket" type="text" placeholder="ID Cliente" required />
+
+        <label for="nombreConciertoTicket">Seleccionar Concierto:</label>
         <select id="nombreConciertoTicket">
           <option value="Concierto 1">Concierto 1</option>
           <option value="Concierto 2">Concierto 2</option>
           <option value="Concierto 3">Concierto 3</option>
           <option value="Concierto 4">Concierto 4</option>
         </select>
+
+        <label for="descuento">Descuento Aplicable:</label>
         <input
           id="descuento"
           type="number"
           placeholder="Descuento Aplicable"
           required
         />
+
         <button type="submit">Añadir Ticket</button>
       </form>
 
-      <button onclick="mostrarTickets()">
-        Mostrar Tickets del Concierto Seleccionado
-      </button>
+      <button onclick="mostrarTickets()">Mostrar Tickets</button>
 
       <div id="ticketsDisplay">
-        <h3>Tickets del Concierto Seleccionado</h3>
         <div id="listaTickets"></div>
       </div>
 
@@ -86,7 +92,6 @@
         <div id="listaConciertosProximos"></div>
       </div>
     </main>
-
     <script src="script.js"></script>
   </body>
 </html>
