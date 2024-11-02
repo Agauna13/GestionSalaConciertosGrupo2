@@ -5,6 +5,7 @@
   --color-fondo: #f9f9fd;
   --color-texto: #333333;
 }
+
 html {
   scroll-behavior: smooth;
 }
@@ -22,7 +23,6 @@ body {
 
 main {
   width: 1200px;
-  align-items: center;
 }
 
 h1,
@@ -50,7 +50,6 @@ div.concierto {
 
 form {
   margin: auto;
-  align-items: center;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -89,7 +88,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--color-accento);
+  background-color: var(--color-acento);
 }
 
 #menuFlotante {
@@ -104,26 +103,36 @@ button:hover {
   cursor: pointer;
   text-align: center;
 }
+
 #botonMostrarTicketsContainer {
   display: flex;
   justify-content: center;
   margin: 20px 0;
 }
 
-#ticketsDisplay #conciertosProximos {
-  margin: 20px 0;
-}
-
-#listaTickets,
-#listaConciertosProximos {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
 .ticket {
+  text-align: center;
   background-color: rgba(255, 228, 225, 0.5);
   padding: 15px;
   border-radius: 5px;
   border: 1px solid #ffb3b3;
+}
+
+.listaConciertosProximos {
+  display: right;
+  flex-direction: column;
+  align-items: center;
+}
+
+.conciertoProximo {
+  background-color: var(--color-fondo);
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+}
+
+.conciertoProximo p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--color-texto);
 }

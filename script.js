@@ -1,5 +1,6 @@
 const listaConciertos = [];
 
+// Constructor para conciertos
 function Concierto(
   idConcierto,
   nombreConcierto,
@@ -11,12 +12,13 @@ function Concierto(
   this.idConcierto = idConcierto;
   this.nombreConcierto = formatearNombreConcierto(nombreConcierto);
   this.nombreArtista = formatearNombreArtista(nombreArtista);
+  this.generoConcierto = formatearNombreArtista(generoConcierto);
   this.fechaConcierto = fechaConcierto;
-  this.generoConcierto = generoConcierto;
   this.precioBase = precioBase;
   this.listaTickets = [];
 }
 
+// Constructor para tickets
 function Ticket(id_Cliente, concierto, descuento) {
   this.id_Cliente = id_Cliente;
   this.idConcierto = concierto.idConcierto;
@@ -25,7 +27,7 @@ function Ticket(id_Cliente, concierto, descuento) {
   this.precio = concierto.precioBase - concierto.precioBase * (descuento / 100);
 }
 
-//conciertos ya creados
+// Conciertos iniciales
 const concierto1 = new Concierto(
   1,
   "Concierto 1",
@@ -35,9 +37,6 @@ const concierto1 = new Concierto(
   100
 );
 listaConciertos.push(concierto1);
-
-const ticket1 = new Ticket(1, concierto1, 10);
-concierto1.listaTickets.push(ticket1);
 
 const concierto2 = new Concierto(
   2,
@@ -49,9 +48,6 @@ const concierto2 = new Concierto(
 );
 listaConciertos.push(concierto2);
 
-const ticket2 = new Ticket(2, concierto2, 20);
-concierto2.listaTickets.push(ticket2);
-
 const concierto3 = new Concierto(
   3,
   "Concierto 3",
@@ -61,9 +57,6 @@ const concierto3 = new Concierto(
   120
 );
 listaConciertos.push(concierto3);
-
-const ticket3 = new Ticket(3, concierto3, 15);
-concierto3.listaTickets.push(ticket3);
 
 const concierto4 = new Concierto(
   4,
@@ -75,53 +68,46 @@ const concierto4 = new Concierto(
 );
 listaConciertos.push(concierto4);
 
-const ticket4 = new Ticket(4, concierto4, 30);
-concierto4.listaTickets.push(ticket4);
-
-/******************************************************************************************** */
-
-function mostrarConciertos() {
-  return listaConciertos.map((concierto) => {
-    return {
-      ID: concierto.idConcierto,
-      Nombre: concierto.nombreConcierto,
-      Artista: concierto.nombreArtista,
-      Género: concierto.generoConcierto,
-      Fecha: concierto.fechaConcierto,
-      PrecioBase: concierto.precioBase,
-    };
-  });
-}
-
+// Renderiza conciertos en HTML
 function renderizarConciertos() {
   const contenedor = document.getElementById("contenedorConciertos");
   contenedor.innerHTML = "";
-  const conciertos = mostrarConciertos();
-
-  conciertos.forEach((concierto) => {
+  listaConciertos.forEach((concierto) => {
     const conciertoHTML = document.createElement("div");
     conciertoHTML.classList.add("concierto");
-
     conciertoHTML.innerHTML = `
-            <div class="titulo">${concierto.Nombre}</div>
-            <p><strong>ID:</strong> ${concierto.ID}</p>
-            <p><strong>Artista:</strong> ${concierto.Artista}</p>
-            <p><strong>Género:</strong> ${concierto.Género}</p>
-            <p><strong>Fecha:</strong> ${concierto.Fecha}</p>
-            <p><strong>Precio Base:</strong> $${concierto.PrecioBase}</p>
-        `;
-
+      <div class="titulo">${concierto.nombreConcierto}</div>
+      <p><strong>ID:</strong> ${concierto.idConcierto}</p>
+      <p><strong>Artista:</strong> ${concierto.nombreArtista}</p>
+      <p><strong>Género:</strong> ${concierto.generoConcierto}</p>
+      <p><strong>Fecha:</strong> ${concierto.fechaConcierto}</p>
+      <p><strong>Precio Base:</strong> $${concierto.precioBase}</p>
+    `;
     contenedor.appendChild(conciertoHTML);
   });
 }
 
-renderizarConciertos();
+// Actualiza el menú desplegable con los conciertos
+function actualizarConciertosDropdown() {
+  const selectElement = document.getElementById("nombreConciertoTicket");
+  selectElement.innerHTML = "";
+  listaConciertos.forEach((concierto) => {
+    const option = document.createElement("option");
+    option.value = concierto.nombreConcierto;
+    option.textContent = concierto.nombreConcierto;
+    selectElement.appendChild(option);
+  });
+}
 
+// Inicializa los conciertos y el menú desplegable
+renderizarConciertos();
+actualizarConciertosDropdown();
+
+// Añadir un nuevo concierto
 document
   .getElementById("formConcierto")
   .addEventListener("submit", function (event) {
     event.preventDefault();
-
     const nombreConcierto = document.getElementById("nombreConcierto").value;
     const nombreArtista = document.getElementById("nombreArtista").value;
     const fechaConcierto = document.getElementById("fechaConcierto").value;
@@ -129,7 +115,7 @@ document
     const precioBase = parseFloat(
       document.getElementById("precioConcierto").value
     );
-    let idConcierto = generarIDConcierto(fechaConcierto, precioBase);
+    const idConcierto = listaConciertos.length + 1;
 
     const nuevoConcierto = new Concierto(
       idConcierto,
@@ -141,49 +127,31 @@ document
     );
     listaConciertos.push(nuevoConcierto);
 
-    alert("Concierto añadido correctamente");
-    document.getElementById("formConcierto").reset();
-
-    console.log(listaConciertos);
     renderizarConciertos();
+    actualizarConciertosDropdown();
+    document.getElementById("formConcierto").reset();
+    alert("Concierto añadido correctamente");
   });
 
-function revisarConciertos() {
-  const hoy = new Date();
-  const proximosConciertos = document.getElementById("listaConciertosProximos");
-  proximosConciertos.innerHTML = "";
-
-  listaConciertos.forEach((concierto) => {
-    const fechaConcierto = new Date(concierto.fechaConcierto);
-    const diferenciaDias = (fechaConcierto - hoy) / (1000 * 60 * 60 * 24);
-
-    if (diferenciaDias >= 0 && diferenciaDias <= 7) {
-      const conciertoDiv = document.createElement("div");
-      conciertoDiv.className = "concierto";
-      conciertoDiv.innerText = `🎶 ${concierto.nombreConcierto} - ${concierto.nombreArtista} | Fecha: ${concierto.fechaConcierto} | Género: ${concierto.generoConcierto}`;
-
-      proximosConciertos.appendChild(conciertoDiv);
-    }
-  });
-}
-
+// Añadir un ticket para el concierto seleccionado
 document
   .getElementById("formTicket")
   .addEventListener("submit", function (event) {
     event.preventDefault();
-
     const idCliente = document.getElementById("idTicket").value;
     const nombreConcierto = document.getElementById(
       "nombreConciertoTicket"
     ).value;
     const descuento = parseFloat(document.getElementById("descuento").value);
 
+    // Encontrar el concierto seleccionado
     const concierto = listaConciertos.find(
       (c) => c.nombreConcierto === nombreConcierto
     );
     if (concierto) {
       const nuevoTicket = new Ticket(idCliente, concierto, descuento);
       concierto.listaTickets.push(nuevoTicket);
+      console.log("Tickets actuales:", concierto.listaTickets);
 
       document.getElementById("formTicket").reset();
       alert("Ticket añadido correctamente");
@@ -192,7 +160,7 @@ document
     }
   });
 
-// Función para mostrar tickets del concierto seleccionado
+// Mostrar los tickets del concierto seleccionado
 function mostrarTickets() {
   const nombreConcierto = document.getElementById(
     "nombreConciertoTicket"
@@ -219,6 +187,27 @@ function mostrarTickets() {
     listaTicketsDiv.innerHTML =
       "<p>No hay tickets disponibles para el concierto seleccionado.</p>";
   }
+}
+
+// Filtrar conciertos que ocurrirán en menos de una semana
+function revisarConciertos() {
+  const listaConciertosProximos = document.getElementById(
+    "listaConciertosProximos"
+  );
+  listaConciertosProximos.innerHTML = "";
+
+  const hoy = new Date();
+  listaConciertos.forEach((concierto) => {
+    const fechaConcierto = new Date(concierto.fechaConcierto);
+    const diferencia = (fechaConcierto - hoy) / (1000 * 60 * 60 * 24);
+
+    if (diferencia >= 0 && diferencia < 7) {
+      const conciertoHTML = document.createElement("div");
+      conciertoHTML.className = "conciertoProximo";
+      conciertoHTML.innerText = `🎶 Concierto: ${concierto.nombreConcierto} | Fecha: ${concierto.fechaConcierto} | Género: ${concierto.generoConcierto}`;
+      listaConciertosProximos.appendChild(conciertoHTML);
+    }
+  });
 }
 
 /******************************************************************************************** */
