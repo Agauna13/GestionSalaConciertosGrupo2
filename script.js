@@ -64,9 +64,139 @@ const concierto4 = new Concierto(
   "Beethoven",
   "Música Clásica",
   "2024-12-01",
-  300
+  50
 );
 listaConciertos.push(concierto4);
+
+const concierto5 = new Concierto(
+  5,
+  "Concierto 4",
+  "System of a down",
+  "Nu Metal",
+  "2024-12-01",
+  300
+);
+listaConciertos.push(concierto5);
+
+const concierto6 = new Concierto(
+  6,
+  "Concierto 6",
+  "Rosalía",
+  "Tortura auditiva",
+  "2024-12-01",
+  300
+);
+listaConciertos.push(concierto6);
+
+
+
+const concierto7 = new Concierto(
+  7,
+  "Concierto 7",
+  "Nirvana",
+  "Grunge",
+  "2024-12-01",
+  300
+);
+listaConciertos.push(concierto7);
+
+
+
+const concierto8 = new Concierto(
+  8,
+  "Concierto 8",
+  "Taylor swift",
+  "Pop country",
+  "2024-12-01",
+  300
+);
+listaConciertos.push(concierto8);
+
+
+const concierto9 = new Concierto(
+  9,
+  "Concierto 9",
+  "Justin Bieber",
+  "Pop",
+  "2024-12-01",
+  300
+);
+listaConciertos.push(concierto9);
+
+
+const concierto10 = new Concierto(
+  10,
+  "Concierto 10",
+  "Rammstein",
+  "Industrial Metal",
+  "2024-12-01",
+  300
+);
+listaConciertos.push(concierto10);
+
+
+const concierto11 = new Concierto(
+  11,
+  "Concierto 11",
+  "Toy Dolls",
+  "Punk",
+  "2024-12-01",
+  300
+);
+listaConciertos.push(concierto11);
+
+
+
+const concierto12 = new Concierto(
+  12,
+  "Concierto 12",
+  "Rage against the machine",
+  "Rap Metal",
+  "2024-12-01",
+  300
+);
+listaConciertos.push(concierto12);
+
+const concierto13 = new Concierto(
+  13,
+  "Concierto 13",
+  "Rapsodhy",
+  "Epic Metal",
+  "2024-12-01",
+  300
+);
+listaConciertos.push(concierto13);
+
+
+const concierto14 = new Concierto(
+  14,
+  "Concierto 14",
+  "Manolete",
+  "Copla Española",
+  "2024-12-01",
+  300
+);
+listaConciertos.push(concierto14);
+
+const concierto15 = new Concierto(
+  15,
+  "Concierto 15",
+  "Raphael",
+  "Balada",
+  "2024-12-01",
+  300
+);
+listaConciertos.push(concierto15);
+
+const concierto16 = new Concierto(
+  16,
+  "Concierto 16",
+  "Metallica",
+  "Grunge",
+  "2024-12-01",
+  300
+);
+listaConciertos.push(concierto16);
 
 // Renderiza conciertos en HTML
 function renderizarConciertos() {
@@ -76,7 +206,7 @@ function renderizarConciertos() {
     const conciertoHTML = document.createElement("div");
     conciertoHTML.classList.add("concierto");
     conciertoHTML.innerHTML = `
-      <div class="titulo">${concierto.nombreConcierto}</div>
+      <h2 class="titulo">${concierto.nombreConcierto}</h2>
       <p><strong>ID:</strong> ${concierto.idConcierto}</p>
       <p><strong>Artista:</strong> ${concierto.nombreArtista}</p>
       <p><strong>Género:</strong> ${concierto.generoConcierto}</p>
