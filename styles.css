@@ -106,8 +106,15 @@ button:hover {
 
 #botonMostrarTicketsContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin: 20px 0;
+}
+
+#botonMostrarTicketsContainer button{
+  width: 7vw;
+  height: 7vh;
 }
 
 .ticket {
