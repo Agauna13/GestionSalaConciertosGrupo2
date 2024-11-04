@@ -24,7 +24,7 @@ function Ticket(id_Cliente, concierto, descuento) {
   this.idConcierto = concierto.idConcierto;
   this.nombreConcierto = concierto.nombreConcierto;
   this.descuento = descuento;
-  this.precio = concierto.precioBase - concierto.precioBase * (descuento / 100);
+  this.precio = calcularPrecioDescuento(concierto.precioBase, descuento);
 }
 
 // Conciertos iniciales
@@ -505,36 +505,6 @@ function generarIDConcierto(fechaConcierto, precioBase) {
 
   // Concatena la fecha formateada, el precio formateado y el valor aleatorio
   return fechaFormateada + precioFormateado + randomValue;
-}
-
-// Calcular ingresos esperados
-function calcularIngresosEsperados(precioTiket, ticketsVendido) {
-  let ingresosSinDesuento = precioTiket * ticketsVendido;
-  return ingresosSinDesuento.toFixed(2);
-}
-
-/*Calcular ingresos esperado si se han guardado por separado las ventas de los tickets con descuento
-y sin descuento y teniendo solo un tipo de descuento*/
-function calcularIngresosReales(
-  precioTiket,
-  ticketsVendido,
-  ticketsDescuento,
-  ticketsDescuentoVendido
-) {
-  let ingresosSinDesuento = precioTiket * ticketsVendido;
-  let ingresosConDesuento = precioTiketDescuento * ticketsDescuentoVendido;
-  let total = ingresosSinDesuento + ingresosConDesuento;
-  return total.toFixed(0);
-}
-
-//Si no varia el porcentaje que se lleva el artista seria este, borrar si lo recibe de otro lado
-function calcularDivisionIngresos(ingresoTotal, porcentajeArtista) {
-  if (porcentajeArtista < 0 || porcentajeArtista > 100) {
-    return "Porcentje introducido incorrecto";
-  }
-  let cantidadArtista = ingresoTotal * porcentajeArtista;
-  //let cantidadArtista = ingresoTotal * (porcentajeArtista / 100);
-  return cantidadArtista.toFixed(2);
 }
 
 //Con Math
