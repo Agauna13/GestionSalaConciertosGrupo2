@@ -335,7 +335,7 @@ function determinarTemporada(fechaConcierto) {
 }
 
 
-//Para calcular la cantidad de
+//Para calcular la cantidad de días restantes entre el día presente y la fecha del concierto
 function calcularDiasAntelacion(fechaConcierto) {
   let fechaConciertoObj = new Date(fechaConcierto);
   let hoy = new Date();
@@ -346,7 +346,10 @@ function calcularDiasAntelacion(fechaConcierto) {
 }
 
 
-//STRINGS
+
+
+
+//Objeto String
 function formatearNombreConcierto(nombre) {
   if (typeof nombre !== "string") {
     console.log("Error, el valor debe ser de tipo string");
@@ -378,7 +381,7 @@ function formatearNombreArtista(artista) {
   return palabrasLimpias.join(" ");
 }
 
-function crearDescripcionlistaConciertos(  /*Usar esto para generar una pequeña descripción del concierto */
+function crearDescripcionlistaConciertos(
   nombreConcierto,
   nombreArtista,
   fecha
